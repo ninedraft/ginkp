@@ -3,8 +3,9 @@
 [Project wiki](https://github.com/ninedraft/ginkp/wiki)
 
 ## Roadmap:
-- [ ] client package (compressing, encrypting)
+- [ ] mailer package (compressing, encrypting)
 - [x] documentation
 - [ ] examples
 - [ ] tosser package
+- [ ] teacker package
 - [ ] overlay transport for binkp
