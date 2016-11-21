@@ -1,6 +1,9 @@
 package command
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 type Code byte
 
@@ -23,6 +26,21 @@ type FileConfig struct {
 	Size   int
 	Time   time.Time
 	Offset int
+}
+
+func (fileConfig *FileConfig) String() string {
+	return fmt.Sprintf("%s %d %d %d",
+		fileConfig.Name,
+		fileConfig.Size,
+		fileConfig.Time.Unix(),
+		fileConfig.Offset)
+}
+
+func (fileConfig *FileConfig) StringWithoutOff() string {
+	return fmt.Sprintf("%s %d %d",
+		fileConfig.Name,
+		fileConfig.Size,
+		fileConfig.Time.Unix())
 }
 
 type Command interface {
