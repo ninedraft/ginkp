@@ -4,7 +4,7 @@
 
 ## Roadmap:
 - [ ] client package (compressing, encrypting)
-- [ ] documentation
+- [x] documentation
 - [ ] examples
 - [ ] tosser package
 - [ ] overlay transport for binkp
