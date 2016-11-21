@@ -3,7 +3,7 @@
 [Project wiki](https://github.com/ninedraft/ginkp/wiki)
 
 ## Roadmap:
-- [ ] client package
+- [ ] client package (compressing, encrypting)
 - [ ] examples
 - [ ] tosser package
 - [ ] overlay transport for binkp
