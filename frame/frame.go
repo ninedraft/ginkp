@@ -1,7 +1,8 @@
 package frame
 
-import "bytes"
+// binkp specification: http://ftsc.org/docs/fts-1026.001
 
+import "bytes"
 import "errors"
 import "io"
 import "sync"
