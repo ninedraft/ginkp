@@ -1,0 +1,585 @@
+use 'godoc cmd/ginkp/frame' for documentation on the ginkp/frame command 
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script type='text/javascript'>
+	document.ANALYSIS_DATA = ;
+	document.CALLGRAPH = ;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "ginkp/frame"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+			</div>
+		</div>
+		
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+				<dd><a href="#pkg-variables">Variables</a></dd>
+			
+			
+				
+				<dd><a href="#DeleteFrame">func DeleteFrame(frame *Frame)</a></dd>
+			
+			
+				
+				<dd><a href="#Frame">type Frame</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewFrame">func NewFrame() *Frame</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.Args">func (frame *Frame) Args() (string, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.CommandCode">func (frame *Frame) CommandCode() (CommandCode, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.Copy">func (frame *Frame) Copy() (*Frame, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.DataReader">func (frame *Frame) DataReader() (io.Reader, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.DataSize">func (frame *Frame) DataSize() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.IsCommand">func (frame *Frame) IsCommand() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_ADR">func (frame *Frame) M_ADR(addr []string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_BSY">func (frame *Frame) M_BSY(err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_EOB">func (frame *Frame) M_EOB()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_ERR">func (frame *Frame) M_ERR(err error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_FILE">func (frame *Frame) M_FILE(file *FileConfig)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_GET">func (frame *Frame) M_GET(file *FileConfig)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_GOT">func (frame *Frame) M_GOT(file *FileConfig)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_NUL">func (frame *Frame) M_NUL(msg string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_OK">func (frame *Frame) M_OK()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_PWD">func (frame *Frame) M_PWD(password string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.M_SKIP">func (frame *Frame) M_SKIP(file *FileConfig)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.ReadDataFrom">func (frame *Frame) ReadDataFrom(r io.Reader) (int64, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.Reader">func (frame *Frame) Reader() io.Reader</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.UpdateLen">func (frame *Frame) UpdateLen()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Frame.WriteDataTo">func (frame *Frame) WriteDataTo(w io.Writer) (int64, error)</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h4>Package files</h4>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="/src/ginkp/frame/frame.go">frame.go</a>
+			
+				<a href="/src/ginkp/frame/utils.go">utils.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		<div id="pkg-callgraph" class="toggle" style="display: none">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Internal Call Graph section">Internal call graph ▹</h2>
+		</div> <!-- .expanded -->
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Internal Call Graph section">Internal call graph ▾</h2>
+			<p>
+			  In the call graph viewer below, each node
+			  is a function belonging to this package
+			  and its children are the functions it
+			  calls&mdash;perhaps dynamically.
+			</p>
+			<p>
+			  The root nodes are the entry points of the
+			  package: functions that may be called from
+			  outside the package.
+			  There may be non-exported or anonymous
+			  functions among them if they are called
+			  dynamically from another package.
+			</p>
+			<p>
+			  Click a node to visit that function's source code.
+			  From there you can visit its callers by
+			  clicking its declaring <code>func</code>
+			  token.
+			</p>
+			<p>
+			  Functions may be omitted if they were
+			  determined to be unreachable in the
+			  particular programs or tests that were
+			  analyzed.
+			</p>
+			<!-- Zero means show all package entry points. -->
+			<ul style="margin-left: 0.5in" id="callgraph-0" class="treeview"></ul>
+		</div>
+		</div> <!-- #pkg-callgraph -->
+
+		
+		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				<pre>var (
+    <span id="ErrFrameIsNotCommand">ErrFrameIsNotCommand</span> = <a href="/pkg/errors/">errors</a>.<a href="/pkg/errors/#New">New</a>(&#34;frame isn&#39;t command&#34;)
+    <span id="ErrEmptyFrame">ErrEmptyFrame</span>        = <a href="/pkg/errors/">errors</a>.<a href="/pkg/errors/#New">New</a>(&#34;empty frame&#34;)
+)</pre>
+				
+			
+		
+		
+			
+			
+			<h2 id="DeleteFrame">func <a href="/src/target/frame.go?s=748:778#L36">DeleteFrame</a>
+				<a class="permalink" href="#DeleteFrame">&#xb6;</a>
+			</h2>
+			<pre>func DeleteFrame(frame *<a href="#Frame">Frame</a>)</pre>
+			
+			
+			
+
+		
+		
+			
+			
+			<h2 id="Frame">type <a href="/src/target/frame.go?s=650:685#L28">Frame</a>
+				<a class="permalink" href="#Frame">&#xb6;</a>
+			</h2>
+			<pre>type Frame struct {
+    <a href="/pkg/bytes/">bytes</a>.<a href="/pkg/bytes/#Buffer">Buffer</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewFrame">func <a href="/src/target/frame.go?s=687:709#L32">NewFrame</a>
+					<a class="permalink" href="#NewFrame">&#xb6;</a>
+				</h3>
+				<pre>func NewFrame() *<a href="#Frame">Frame</a></pre>
+				
+				
+				
+			
+
+			
+				
+				<h3 id="Frame.Args">func (*Frame) <a href="/src/target/frame.go?s=6946:6988#L216">Args</a>
+					<a class="permalink" href="#Frame.Args">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) Args() (<a href="/pkg/builtin/#string">string</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Args ...
+Returns string, which represents command args or error
+ErrFrameIsNotCommand, if frame doesn&#39;t contain command or
+ErrEmptyFrame if frame is empty (less 3 bytes)
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.CommandCode">func (*Frame) <a href="/src/target/frame.go?s=6508:6562#L200">CommandCode</a>
+					<a class="permalink" href="#Frame.CommandCode">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) CommandCode() (<a href="#CommandCode">CommandCode</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+CommandCode ...
+Returns CommandCode or error ErrFrameIsNotCommand,
+if frame doesn&#39;t contain command or
+ErrEmptyFrame, if frame is empty (less 3 bytes)
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.Copy">func (*Frame) <a href="/src/target/frame.go?s=7796:7838#L253">Copy</a>
+					<a class="permalink" href="#Frame.Copy">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) Copy() (*<a href="#Frame">Frame</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Copy ...
+Makes full frame copy.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.DataReader">func (*Frame) <a href="/src/target/frame.go?s=8377:8428#L271">DataReader</a>
+					<a class="permalink" href="#Frame.DataReader">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) DataReader() (<a href="/pkg/io/">io</a>.<a href="/pkg/io/#Reader">Reader</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+DataReader ...
+Returns io.Reader, which reads bytes from frame data section
+Doesn&#39;t copy frame data, so all changes over original frame
+will be reflected in io.Reader data
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.DataSize">func (*Frame) <a href="/src/target/frame.go?s=8635:8669#L281">DataSize</a>
+					<a class="permalink" href="#Frame.DataSize">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) DataSize() <a href="/pkg/builtin/#int">int</a></pre>
+				<p>
+DataSize ...
+Returns frame data section size (0 if frame is less then 3 bytes)
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.IsCommand">func (*Frame) <a href="/src/target/frame.go?s=806:842#L40">IsCommand</a>
+					<a class="permalink" href="#Frame.IsCommand">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) IsCommand() <a href="/pkg/builtin/#bool">bool</a></pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_ADR">func (*Frame) <a href="/src/target/frame.go?s=2233:2273#L104">M_ADR</a>
+					<a class="permalink" href="#Frame.M_ADR">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_ADR(addr []<a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+M_ADR ...
+A list of 5D addresses delimited by spaces.
+eg, &#34;2:5047/13@fidonet 2:5047/0@fidonet&#34;
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_BSY">func (*Frame) <a href="/src/target/frame.go?s=5111:5147#L170">M_BSY</a>
+					<a class="permalink" href="#Frame.M_BSY">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_BSY(err <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+M_BSY ...
+Our system sends it if it is busy. The receiving partner ignores the argument (logs it).
+eg, &#34;Too many servers are running already&#34;
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_EOB">func (*Frame) <a href="/src/target/frame.go?s=3949:3976#L144">M_EOB</a>
+					<a class="permalink" href="#Frame.M_EOB">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_EOB()</pre>
+				<p>
+M_EOB ...
+End­of­Batch. EOB is transmitted after all the files have been sent. If we are in the EOB state (all the
+files are sent), we get EOB from the remote (no more files for us), we received all acknowledgements
+for all the sent files, we received all the files resent in reply to GET,
+then the session is considered to be successfully completed.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_ERR">func (*Frame) <a href="/src/target/frame.go?s=4862:4898#L163">M_ERR</a>
+					<a class="permalink" href="#Frame.M_ERR">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_ERR(err <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+M_ERR ...
+A fatal error. The partner who has sent M_ERR aborts the session. The argument contains the text
+explaining the reason and it is logged. Binkd sends M_ERR in response to an incorrect password.
+eg, &#34;Incorrect password&#34;
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_FILE">func (*Frame) <a href="/src/target/frame.go?s=3266:3310#L128">M_FILE</a>
+					<a class="permalink" href="#Frame.M_FILE">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_FILE(file *<a href="#FileConfig">FileConfig</a>)</pre>
+				<p>
+M_FILE ...
+The properties of the next file. They are delimited by spaces: filename without spaces, size, UNIX­
+time, the offset to transfer the file. All the numbers are decimal. All the data blocks received after that
+relate to this file until the next M_FILE is received. There is no special end­of­file marker since the file
+size is known beforehand. Binkd will append the &#34;excessive&#34; blocks to the current file. We start
+transmitting every new file from the offset 0. On receiving M_GET from the remote system we must
+do the seek operation.
+eg, &#34;config.sys 125 2476327846 0&#34;
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_GET">func (*Frame) <a href="/src/target/frame.go?s=6015:6058#L185">M_GET</a>
+					<a class="permalink" href="#Frame.M_GET">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_GET(file *<a href="#FileConfig">FileConfig</a>)</pre>
+				<p>
+M_GET ...
+M_GET is used as a request to resend a file. The M_GET arguments copy the arguments of the
+M_FILE command which we’d like to see from the remote system. :) Binkd sends it as a response to
+M_FILE if it does not like the offset from which the file transmission has been started by the remote
+system.
+eg, &#34;config.sys 125 2476327846 100&#34;
+At present binkd handles it as follows: according to the first fields (name/size/UNIX­time) it
+determines whether the M_GET argument is the file we currently transmit (or the file has been
+transmitted and we are waiting for M_GOT for it). If this is the case it seeks the specified offset in the
+file and sends M_FILE after that. For the example above M_FILE will have the following arguments:
+&#34;config.sys 125 2476327846 100&#34;
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_GOT">func (*Frame) <a href="/src/target/frame.go?s=4504:4547#L155">M_GOT</a>
+					<a class="permalink" href="#Frame.M_GOT">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_GOT(file *<a href="#FileConfig">FileConfig</a>)</pre>
+				<p>
+M_GOT ...
+It is sent as an acknowledgement by the system which has received a file after receiving the last
+portion of the file data. The arguments are copies of the FILE command arguments received from the
+remote system except the last one, the offset which should not be returned to the system which sent
+M_FILE. GOT may also be sent during the process of receiving a file; the sending partner should react
+to it with the destructive skip.
+eg, &#34;config.sys 125 2476327846&#34;
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_NUL">func (*Frame) <a href="/src/target/frame.go?s=2038:2075#L97">M_NUL</a>
+					<a class="permalink" href="#Frame.M_NUL">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_NUL(msg <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+M_NUL ...
+The command argument is ignored (and is possibly logged).
+This is the way we transmit the nodelist information,
+the sysop’s name and so on.
+eg, &#34;ZYZ Dima Maloff&#34;
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_OK">func (*Frame) <a href="/src/target/frame.go?s=3523:3549#L135">M_OK</a>
+					<a class="permalink" href="#Frame.M_OK">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_OK()</pre>
+				<p>
+M_OK ...
+A reply to the correct password. The binkd client rescans the queue after receiving the message.
+The command argument is ignored.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_PWD">func (*Frame) <a href="/src/target/frame.go?s=2559:2601#L116">M_PWD</a>
+					<a class="permalink" href="#Frame.M_PWD">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_PWD(password <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+M_PWD ...
+A password. After the successful processing of the password received from the remote,
+the binkd server rescans the queue.
+eg, &#34;pAsSwOrD&#34;
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.M_SKIP">func (*Frame) <a href="/src/target/frame.go?s=6226:6270#L192">M_SKIP</a>
+					<a class="permalink" href="#Frame.M_SKIP">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) M_SKIP(file *<a href="#FileConfig">FileConfig</a>)</pre>
+				<p>
+M_SKIP ...
+Non destructive skip. An example of the argument line:
+&#34;config.sys 125 2476327846&#34;
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.ReadDataFrom">func (*Frame) <a href="/src/target/frame.go?s=7612:7672#L244">ReadDataFrom</a>
+					<a class="permalink" href="#Frame.ReadDataFrom">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) ReadDataFrom(r <a href="/pkg/io/">io</a>.<a href="/pkg/io/#Reader">Reader</a>) (<a href="/pkg/builtin/#int64">int64</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+ReadDataFrom ...
+Read bytes from io.Reader to frame data section.
+Returns error if occcures.
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.Reader">func (*Frame) <a href="/src/target/frame.go?s=8110:8148#L263">Reader</a>
+					<a class="permalink" href="#Frame.Reader">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) Reader() <a href="/pkg/io/">io</a>.<a href="/pkg/io/#Reader">Reader</a></pre>
+				<p>
+Reader ...
+Returns io.Reader, which reads bytes from frame(including header).
+Doesn&#39;t copy frame, so all changes over original frame
+will be reflected in io.Reader data
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="Frame.UpdateLen">func (*Frame) <a href="/src/target/frame.go?s=942:973#L48">UpdateLen</a>
+					<a class="permalink" href="#Frame.UpdateLen">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) UpdateLen()</pre>
+				
+				
+				
+				
+			
+				
+				<h3 id="Frame.WriteDataTo">func (*Frame) <a href="/src/target/frame.go?s=7291:7350#L231">WriteDataTo</a>
+					<a class="permalink" href="#Frame.WriteDataTo">&#xb6;</a>
+				</h3>
+				<pre>func (frame *<a href="#Frame">Frame</a>) WriteDataTo(w <a href="/pkg/io/">io</a>.<a href="/pkg/io/#Writer">Writer</a>) (<a href="/pkg/builtin/#int64">int64</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+WriteDataTo ...
+Write bytes from frame data section to io.Writer.
+Returns error if occcures.
+</p>
+
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
