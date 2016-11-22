@@ -1,6 +1,6 @@
 package mailer
 
-type ctxKey int
+type ctxKey byte
 
 const (
 	ctxClient ctxKey = iota
