@@ -39,15 +39,16 @@ func newRX(ctx context.Context) {
 	defer func() { returnChunk(buf) }()
 	fr := frame.NewFrame()
 	defer func() { frame.DeleteFrame(fr) }()
-
-	select {
-	case <-ctx.Done():
-		return
-	default:
-	}
-	_, err := io.CopyBuffer(fr, conn, buf)
-	if err != nil && err != io.EOF {
-		log.Error(err)
-		return
+	for fr.Len()-2 != fr.DataSize() {
+		select {
+		case <-ctx.Done():
+			break
+		default:
+			_, err := copyBuf(fr, conn, buf)
+			if err != nil && err != io.EOF {
+				log.Error(err)
+				return
+			}
+		}
 	}
 }

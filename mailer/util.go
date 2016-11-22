@@ -1,6 +1,7 @@
 package mailer
 
 import (
+	"io"
 	"sync"
 )
 
@@ -20,4 +21,13 @@ func getChunk() []byte {
 func returnChunk(p []byte) {
 	copy(p, voidChunk)
 	chunkPool.Put(p)
+}
+
+func copyBuf(w io.Writer, r io.Reader, buf []byte) (int, error) {
+	n, err := r.Read(buf)
+	if err != nil {
+		return 0, err
+	}
+	n, err = w.Write(buf[:n])
+	return n, err
 }
