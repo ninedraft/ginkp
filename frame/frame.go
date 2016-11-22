@@ -305,7 +305,7 @@ func (frame *Frame) DataReader() (io.Reader, error) {
 func (frame *Frame) DataSize() int {
 	fLen := frame.Len()
 	if fLen >= 2 {
-		return fLen - 2
+		return (int(frame.Bytes()[0]&0x40) << 8) + int(frame.Bytes()[1])
 	}
 	return 0
 }
