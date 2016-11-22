@@ -3,6 +3,10 @@ package frame
 import "sync"
 import "bytes"
 
+const (
+	chunkSize = 1 << 15
+)
+
 var (
 	bufPool = sync.Pool{
 		New: func() interface{} {
@@ -11,10 +15,10 @@ var (
 	}
 	bytesPool = sync.Pool{
 		New: func() interface{} {
-			return &[8]byte{}
+			return &[chunkSize]byte{}
 		},
 	}
-	voidBytes = make([]byte, 8)
+	voidBytes = make([]byte, chunkSize)
 )
 
 func getBuf() *bytes.Buffer {
@@ -26,11 +30,11 @@ func returnBuf(buf *bytes.Buffer) {
 	bufPool.Put(buf)
 }
 
-func getBytes() *[8]byte {
-	return bytesPool.Get().(*[8]byte)
+func getBytes() *[chunkSize]byte {
+	return bytesPool.Get().(*[chunkSize]byte)
 }
 
-func returnBytes(p *[8]byte) {
+func returnBytes(p *[chunkSize]byte) {
 	copy((*p)[:], voidBytes)
 	bytesPool.Put(p)
 }
