@@ -40,18 +40,14 @@ func newRX(ctx context.Context) {
 	fr := frame.NewFrame()
 	defer func() { frame.DeleteFrame(fr) }()
 
-header_loop:
-	for {
-		select {
-		case <-ctx.Done():
-			return
-		default:
-		}
-		_, err := io.CopyBuffer(fr, conn, buf)
-		if err != nil && err != io.EOF {
-			log.Error(err)
-			return
-		}
-		break header_loop
+	select {
+	case <-ctx.Done():
+		return
+	default:
+	}
+	_, err := io.CopyBuffer(fr, conn, buf)
+	if err != nil && err != io.EOF {
+		log.Error(err)
+		return
 	}
 }
