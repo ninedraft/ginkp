@@ -3,7 +3,7 @@ package mailer
 type txState byte
 
 const (
-	txGNF = txState(iota)
+	txGNF txState = iota
 	txTryR
 	txReadS
 	txWLA

@@ -8,7 +8,7 @@ import (
 type Code byte
 
 const (
-	M_NUL = Code(iota)
+	M_NUL Code = iota
 	M_ADR
 	M_PWD
 	M_FILE

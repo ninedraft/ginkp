@@ -1,5 +1,6 @@
 package mailer
 
+// +gen ring
 type ctxKey string
 
 const (

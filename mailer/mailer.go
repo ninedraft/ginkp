@@ -1,11 +1,12 @@
 package mailer
 
-import "io"
-import "net"
-import "github.com/Sirupsen/logrus"
-import "context"
 import (
-	. "ginkp/ctxutil"
+	"context"
+	"ginkp/ctxutil"
+	"io"
+	"net"
+
+	"github.com/Sirupsen/logrus"
 )
 
 type Tunnel interface {
@@ -15,7 +16,7 @@ type Tunnel interface {
 type cState byte
 
 const (
-	cConnInit = cState(iota)
+	cConnInit cState = iota
 	cWaitConn
 	cSendPasswd
 	cWaitAddr
@@ -45,7 +46,7 @@ func (client *Client) RunWithContext(ctx context.Context) {
 			if err != nil {
 				client.Log.Error(err)
 			}
-			go newRX(CtxBuilderFromCtx(client.Context).
+			go newRX(ctxutil.CtxBuilderFromCtx(client.Context).
 				With(ctxConn, conn).
 				With(ctxClient, client).
 				With(ctxLog, client.Log).

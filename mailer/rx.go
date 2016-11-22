@@ -13,7 +13,7 @@ import (
 type rxState byte
 
 const (
-	rxWaitF = rxState(iota)
+	rxWaitF rxState = iota
 	rxAccF
 	rxReceD
 	rxWriteD
