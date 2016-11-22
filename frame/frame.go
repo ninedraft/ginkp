@@ -58,8 +58,8 @@ func DeleteFrame(frame *Frame) {
 
 // IsCommand ...
 func (frame *Frame) IsCommand() bool {
-	if frame.Len() < 1 {
-		frame.Grow(1)
+	if frame.Len() < 2 {
+		frame.prepare(2)
 		return false
 	}
 	return frame.Bytes()[0]&0x80>>7 == 1
@@ -228,12 +228,12 @@ func (frame *Frame) SetSKIP(file *command.FileConfig) {
 // if frame doesn't contain command or
 // ErrEmptyFrame, if frame is empty (less 3 bytes)
 func (frame *Frame) CommandCode() (command.Code, error) {
+	if !frame.IsCommand() {
+		return 0, ErrFrameIsNotCommand
+	}
 	fLen := frame.Len()
 	fBytes := frame.Bytes()
 	if fLen >= 3 {
-		if (fBytes[0]&0x80)>>1 != 1 {
-			return 0, ErrFrameIsNotCommand
-		}
 		return command.Code(fBytes[2]), nil
 	}
 	return 0, ErrEmptyFrame

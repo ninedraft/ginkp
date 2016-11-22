@@ -17,6 +17,6 @@ func TestFrameDataSize(t *testing.T) {
 	t.Logf("frame len %d", fr.Len())
 	t.Logf("data size %d", fr.DataSize())
 	if fr.Len()-2 != fr.DataSize() {
-		t.Fatal("frame invalid size!")
+		t.Fatal("frame invalid size field!")
 	}
 }
