@@ -1,10 +1,9 @@
 package mailer
 
-// +gen ring
-type ctxKey string
+type ctxKey int
 
 const (
-	ctxClient = ctxKey("client")
-	ctxLog    = ctxKey("log")
-	ctxConn   = ctxKey("connection")
+	ctxClient ctxKey = iota
+	ctxLog
+	ctxConn
 )
