@@ -7,6 +7,7 @@ import "errors"
 import "io"
 import "sync"
 import (
+	"encoding/binary"
 	"ginkp/command"
 )
 
@@ -70,8 +71,7 @@ func (frame *Frame) UpdateLen() {
 	fLen := uint16(frame.Len())
 	fBytes := frame.Bytes()
 	if fLen > 2 {
-		fBytes[0] = (byte(fLen&0xFF) & 0x40) | (fBytes[0] & 0x80)
-		fBytes[1] = byte(fLen >> 8)
+		binary.BigEndian.PutUint16(fBytes[0:2], (fLen-2)&0x7FF)
 	} else {
 		frame.Grow(2 - int(fLen))
 	}
@@ -80,24 +80,30 @@ func (frame *Frame) UpdateLen() {
 // prepare ...
 // Does preparations to write command code.
 // Frows frame or truncate if need
-func (frame *Frame) prepare() {
+func (frame *Frame) prepare(n int) {
 	fLen := frame.Len()
-	if fLen < 3 {
-		frame.Grow(3 - fLen)
-	} else if fLen > 3 {
-		frame.Truncate(fLen - 3)
+	if fLen < n {
+		buf := getBytes()
+		p := (*buf)[:n]
+		_, err := frame.Write(p)
+		returnBytes(buf)
+		if err != nil {
+			panic(err)
+		}
+	} else if fLen > n {
+		frame.Truncate(fLen - n)
 	}
 }
 
 func (frame *Frame) setCommandFlag(command func(*Frame)) {
-	frame.prepare()
+	frame.prepare(3)
 	frame.Bytes()[0] = frame.Bytes()[0] | 0x80
 	command(frame)
 }
 
 func (frame *Frame) writeCommandWithArgs(command command.Code, args []byte) {
 	fBytes := frame.Bytes()
-	frame.prepare()
+	frame.prepare(3)
 	fBytes[2] = byte(command)
 	_, err := frame.Write(args)
 	if err != nil {
@@ -108,7 +114,7 @@ func (frame *Frame) writeCommandWithArgs(command command.Code, args []byte) {
 
 func (frame *Frame) writeCommand(command command.Code) {
 	fBytes := frame.Bytes()
-	frame.prepare()
+	frame.prepare(3)
 	fBytes[2] = byte(command)
 	frame.UpdateLen()
 }
@@ -266,7 +272,11 @@ func (frame *Frame) WriteDataTo(w io.Writer) (int64, error) {
 // Read bytes from io.Reader to frame data section.
 // Returns error if occcures.
 func (frame *Frame) ReadDataFrom(r io.Reader) (int64, error) {
-	frame.prepare()
+	if frame.IsCommand() {
+		frame.prepare(3)
+	} else {
+		frame.prepare(2)
+	}
 	n, err := frame.ReadFrom(r)
 	frame.UpdateLen()
 	return n, err
@@ -295,7 +305,10 @@ func (frame *Frame) Reader() io.Reader {
 func (frame *Frame) DataReader() (io.Reader, error) {
 	fLen := frame.Len()
 	if fLen >= 3 {
-		return bytes.NewReader(frame.Bytes()[3:]), nil
+		if frame.IsCommand() {
+			return bytes.NewReader(frame.Bytes()[3:]), nil
+		}
+		return bytes.NewReader(frame.Bytes()[2:]), nil
 	}
 	return nil, ErrEmptyFrame
 }
@@ -305,7 +318,7 @@ func (frame *Frame) DataReader() (io.Reader, error) {
 func (frame *Frame) DataSize() int {
 	fLen := frame.Len()
 	if fLen >= 2 {
-		return (int(frame.Bytes()[0]&0x7F) << 8) + int(frame.Bytes()[1])
+		return int(binary.BigEndian.Uint16(frame.Bytes()[:2]))
 	}
 	return 0
 }
